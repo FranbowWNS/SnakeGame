@@ -13,6 +13,8 @@ flex-wrap: wrap;
 .grid div {
     width: 20px;
     height: 20px;
+    /*border: 1px black solid;
+    box-sizing:border-box;*/
 }
 
 .snake {
@@ -24,8 +26,8 @@ flex-wrap: wrap;
     width: 100px;
     height: 100px;
     position: fixed;
-    top: 100px;
-    left: 100px;
+    top: 110px;
+    left: 436px;
     display: flex;
     justify-content: center;
     align-items: center;
