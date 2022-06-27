@@ -13,7 +13,7 @@ let currentSnake = [2,1,0];
 let direction = 1;
 let score = 0;
 let speed = 0.8;
-let intervaltime = 0;
+let intervalTime = 0;
 let interval = 0;
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -31,4 +31,32 @@ function createBoard() {
     }
 }
 
+function startGame() {
+    let squares = document.querySelectorAll(".grid div");
+    randomApple(squares); // apple randomise
+    direction = 1;
+    scoreDisplay.innerHTML = score;
+    intervalTime = 1000;
+    currentSnake = [2,1,0];
+    currentIndex = 0;
+    currentSnake.forEach((index) => squares[index].classList.add("snake"));
+    interval = setInterval(moveOutcome, intervalTime);
+}
 
+function moveOutcome() {
+    let squares = document.querySelectorAll(".grid div");
+    if (checkForHits(squares)) {
+        alert('you hit something');
+        popup.style.display = "flex";
+        return clearInterval(interval);
+    } else { moveSnake(squares);
+    }
+}
+
+function moveSnake(squares) {
+    let tail = currentSnake.pop();
+    squares[tail].classList.remove("snake");
+    currentSnake.unshift(currentSnake[0] + direction); //movement ends here
+    eatApple(squares, tail);
+    squares[currentSnake[0]].classList.add("snake");
+}
