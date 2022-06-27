@@ -57,6 +57,21 @@ flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     width: 300px;
-
-
 }
+
+/*.top {
+background-color: blueviolet;
+border: 1px;
+border-color: blue;
+text-align: center;
+display: inline-block;
+border-radius: 15px;
+}
+.bottom{
+    background-color: cyan;
+     border: 1px;
+    border-color: blue;
+    text-align: center;
+    display: inline-block;
+    border-radius: 15px;
+}*/

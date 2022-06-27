@@ -60,3 +60,62 @@ function moveSnake(squares) {
     eatApple(squares, tail);
     squares[currentSnake[0]].classList.add("snake");
 }
+
+function checkForHits(squares) {
+    if(
+        (currentSnake[0] + width >= width * width && direction === width) ||
+        (currentSnake[0] % width === width - 1 && direction === -1) ||
+        (currentSnake[0] % width === 0 && direction ===-1) ||
+        (currentSnake[0] - width <= 0 && direction === -width) ||
+        squares[currentSnake[0] + direction].classList.contains("snake")
+    ) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function eatApple(squares, tail) {
+    if (squares[currentSnake[0]].classList.contains('apple')) {
+        squares[currentSnake[0]].classList.remove('apple');
+        squares[tail].classList.add('snake');
+        currentSnake.push(tail);
+        randomApple(squares);
+        score++;
+        scoreDisplay.textContent = score;
+        clearInterval(interval);
+        intervalTime = intervalTime * speed;
+        interval = setInterval(moveOutcome, intervalTime);
+    }
+}
+
+function randomApple(squares) {
+    do {
+        appleIndex = Math.floor(Math.random() * squares.length);
+    } while (squares[appleIndex].classList.contains('snake'));
+    squares[appleIndex].classList.add('apple');
+}
+
+function control(e) {
+    if (e.keycode === 39) {
+        direction = 1; //right
+    } else if (e.keycode === 38) {
+        direction = -width; //up
+    } else if (e.keycode === 37) {
+        direction = -1; //left 
+    } else if (e.keycode === 40) {
+        direction = +width; //down
+    }
+}
+
+up.addEventListener("click", () => (direction = -width));
+bottom.addEventListener("click",() => (direction = +width));
+left.addEventListener("click", () => (direction = -1));
+right.addEventListener("click", () => (direction = 1));
+
+function replay() {
+    grid.innerHTML = "";
+    createBoard();
+    startGame();
+    popup.style.display = 'none';
+}
